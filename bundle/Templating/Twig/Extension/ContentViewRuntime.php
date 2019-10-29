@@ -10,6 +10,8 @@ use eZ\Publish\API\Repository\Values\Content\Location as APILocation;
 use eZ\Publish\API\Repository\Values\ValueObject;
 use eZ\Publish\Core\MVC\Symfony\View\Renderer;
 use LogicException;
+use Netgen\Bundle\EzPlatformSiteApiBundle\Event\RenderViewEvent;
+use Netgen\Bundle\EzPlatformSiteApiBundle\Events;
 use Netgen\Bundle\EzPlatformSiteApiBundle\View\Builder\ContentViewBuilder;
 use Netgen\Bundle\EzPlatformSiteApiBundle\View\ContentView;
 use Netgen\EzPlatformSiteApi\API\Values\Content;
@@ -135,6 +137,7 @@ class ContentViewRuntime
             $renderedContent = $this->renderController($view, $controllerReference, ['layout' => $layout] + $parameters);
         }
 
+        $this->eventDispatcher->dispatch(Events::NG_VIEW_CONTENT_RENDER, new RenderViewEvent($view));
         $this->eventDispatcher->dispatch(SiteApiEvents::RENDER_CONTENT, new RenderContentEvent($view));
 
         return $renderedContent;

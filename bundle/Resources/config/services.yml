@@ -83,8 +83,8 @@ services:
         tags:
             - { name: request.param_converter, priority: -1 }
 
-    netgen.ezplatform_site.event_listener.content_tagger:
-        class: Netgen\Bundle\EzPlatformSiteApiBundle\EventListener\ContentTaggerListener
+    netgen.ezplatform_site.event_listener.view_tagger:
+        class: Netgen\Bundle\EzPlatformSiteApiBundle\EventListener\ViewTaggerListener
         arguments:
             - '@ezplatform.view_cache.response_tagger.dispatcher'
         tags:
