@@ -137,7 +137,7 @@ class ContentViewRuntime
             $renderedContent = $this->renderController($view, $controllerReference, ['layout' => $layout] + $parameters);
         }
 
-        $this->eventDispatcher->dispatch(Events::NG_VIEW_CONTENT_RENDER, new RenderViewEvent($view));
+        $this->eventDispatcher->dispatch(Events::NG_VIEW_CONTENT_RENDER_VIEW, new RenderViewEvent($view));
         $this->eventDispatcher->dispatch(SiteApiEvents::RENDER_CONTENT, new RenderContentEvent($view));
 
         return $renderedContent;
